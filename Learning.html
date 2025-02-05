@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: #042331;
+            transition: all .5s ease;
+        }
+        .sidebar header {
+            font-size: 22px;
+            color: white;
+            line-height: 70px;
+            text-align: center;
+            background: #063146;
+            user-select: none;
+        }
+        .sidebar ul a {
+            display: block;
+            height: 100%;
+            width: 100%;
+            line-height: 65px;
+            font-size: 20px;
+            color: white;
+            padding-left: 40px;
+            box-sizing: border-box;
+            border-bottom: 1px solid black;
+            border-top: 1px solid rgba(255,255,255,.1);
+            transition: .4s;
+        }
+        ul li:hover a {
+            padding-left: 50px;
+        }
+        .sidebar ul a i {
+            margin-right: 16px;
+        }
+        #check {
+            display: none;
+        }
+        label #btn, label #cancel {
+            position: absolute;
+            background: #042331;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        label #btn {
+            left: 40px;
+            top: 25px;
+            font-size: 35px;
+            color: white;
+            padding: 6px 12px;
+            transition: all .5s;
+        }
+        label #cancel {
+            z-index: 1111;
+            left: -195px;
+            top: 17px;
+            font-size: 30px;
+            color: #0a5275;
+            padding: 4px 9px;
+            transition: all .5s ease;
+        }
+        #check:checked ~ .sidebar {
+            left: 0;
+        }
+        #check:checked ~ label #btn {
+            left: 250px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #check:checked ~ label #cancel {
+            left: 195px;
+        }
+        #check:checked ~ section {
+            margin-left: 250px;
+        }
+        section {
+            background: url(bg.jpeg) no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            transition: all .5s;
+        }
+    </style>
+  </head>
+  <body>
+    <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+    </label>
+
+    <div class="sidebar">
+      <header>Module 1</header>
+      <ul>
+        <li><a href="#" data-video="https://www.youtube.com/embed/8mAITcNt710" data-description="Learn the basics of computer science from Harvard University. This is CS50, an introduction to the intellectual enterprises of computer science and the art of programming."><i class="fas fa-qrcode"></i>Lesson 1</a></li>
+        <li><a href="#" data-video="https://www.youtube.com/embed/2LhoCfjm8R4" data-description="Understanding basic syntax and data types."><i class="fas fa-link"></i>Lesson 2</a></li>
+        <li><a href="#" data-video="https://www.youtube.com/embed/gfkTfcpWqAY" data-description="Diving deeper into control structures."><i class="fas fa-stream"></i>Lesson 3</a></li>
+        <li><a href="#" data-video="https://www.youtube.com/embed/eIrMbAQSU34" data-description="Exploring object-oriented programming concepts."><i class="fas fa-calendar-week"></i>Lesson 4</a></li>
+        <li><a href="#" data-video="https://www.youtube.com/embed/MLG4H1YvBWE" data-description="Working with functions and modules."><i class="far fa-question-circle"></i>Lesson 5</a></li>
+        <li><a href="#" data-video="https://www.youtube.com/embed/8mAITcNt710" data-description="Introduction to APIs and data handling."><i class="fas fa-sliders-h"></i>Lesson 6</a></li>
+        <li><a href="#" data-video="https://www.youtube.com/embed/oHg5SJYRHA0" data-description="Contact administration for your next module"><i class="far fa-envelope"></i>Lesson 7</a></li>
+      </ul>
+    </div>
+
+    <section>
+      <div style="margin-left: 20px;">
+        <iframe id="video-frame" width="1257" height="480" src="https://www.youtube.com/embed/QARI-7_J9bI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <hr>
+      <p id="lesson-description" style="align-items: center;">
+        Introduction to programming fundamentals.
+      </p>
+    </section>
+
+    <script>
+      const lessonLinks = document.querySelectorAll('.sidebar ul a');
+      const videoFrame = document.getElementById('video-frame');
+      const lessonDescription = document.getElementById('lesson-description');
+
+      lessonLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const videoURL = this.getAttribute('data-video');
+          const description = this.getAttribute('data-description');
+
+          videoFrame.src = videoURL;
+          lessonDescription.textContent = description;
+        });
+      });
+    </script>
+  </body>
+</html>
